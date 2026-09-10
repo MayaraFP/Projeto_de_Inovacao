@@ -4,39 +4,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
     <title>Calculadora Financeira</title>
 </head>
 
 <body>
-    <label for="inputQntSala">Digite aqui a quantidade de salas em seu biotério:</label>
-    <input placeholder="Quantidade de salas" type="text" id="inputQntSala">
-    <br> <br>
-    <label for="inputQntGaiolaSala">Agora, digite aqui uma média de quantas gaiolas você tem por sala:</label>
-    <input type="text" placeholder="Gaiolas por sala" id="inputQntGaiolaSala">
-    <br> <br>
-    <label for="inputQntRato">Quantos ratos você tem em seu biotério?</label>
-    <input type="text" placeholder="Quantidade de ratos" id="inputQntRato">
-    <br> <br>
-    <label for="inputQntCamundongo">E camundongos, quantos tem?</label>
-    <input placeholder="Quantidade de camundongos" type="text" id="inputQntCamundongo">
-    <br> <br>
-    <label for="inputDuracaoPesquisa">Quanto tempo, em meses, essa pesquisa durou?</label>
-    <input type="text" placeholder="Duração da pesquisa (em meses)" id="inputDuracaoPesquisa">
-    <br> <br>
-    <label for="inputQntOcorrencia">Quantas ocorrencias com temperatura essa pesquisa teve?</label>
-    <input placeholder="Quantidade de ocorrencias" type="text" id="inputQntOcorrencia">
-    <br> <br>
-    <label for="inputQntTecnicos">Quantos técnicos trabalharam nessa pesquisa?</label>
-    <input type="text" placeholder="Quantidade de técnicos" id="inputQntTecnicos">
-    <br><br>
-    <label for="inputOutrosCustos">Por fim,Informe um valor estimado de despesas adicionais da pesquisa, como materiais,
-        procedimentos ou a utilização de equipamentos.</label>
-    <input type="text" placeholder="Custos adicionais" id="inputOutrosCustos">
-    <br><br>
-    <button onclick="calcular()">Analisar</button>
-    <div id="divMensagem"></div> <br> 
-    <button onclick="base()">Bases de cálculo</button>
-      <div id="base_calculos"></div>
+    <div class="container">
+        <!-- Container dos inputs -->
+        <div class="colunas">
+            <div class="container_inputs">
+                <h2>Calculadora de impacto financeiro de ocorrências</h2>
+                <label for="inputQntSala">Digite a quantidade de salas em seu biotério:</label>
+                <input placeholder="Quantidade de salas" type="text" id="inputQntSala" class="input">
+                <br>
+                <label for="inputQntGaiolaSala">Insira a média de gaiolas por sala:</label>
+                <input type="text" placeholder="Gaiolas por sala" id="inputQntGaiolaSala" class="input">
+                <br>
+                <label for="inputQntRato">Quantos ratos você tem em seu biotério?</label>
+                <input type="text" placeholder="Quantidade de ratos" id="inputQntRato" class="input">
+                <br>
+                <label for="inputQntCamundongo">E quantos camundongos você tem?</label>
+                <input placeholder="Quantidade de camundongos" type="text" id="inputQntCamundongo" class="input">
+                <br>
+                <label for="inputDuracaoPesquisa">Quanto tempo, em meses, essa pesquisa durou?</label>
+                <input type="text" placeholder="Duração da pesquisa (em meses)" id="inputDuracaoPesquisa" class="input">
+                <br>
+                <label for="inputQntOcorrencia">Quantas ocorrencias com temperatura essa pesquisa teve?</label>
+                <input placeholder="Quantidade de ocorrencias" type="text" id="inputQntOcorrencia" class="input">
+                <br>
+                <label for="inputQntTecnicos">Quantos técnicos trabalharam nessa pesquisa?</label>
+                <input type="text" placeholder="Quantidade de técnicos" id="inputQntTecnicos" class="input">
+                <br>
+                <label for="inputOutrosCustos">Informe um valor estimado de despesas adicionais da pesquisa <br> (materiais, procedimentos, utilização de equipamentos).</label>
+                <input type="text" placeholder="Custos adicionais" id="inputOutrosCustos" class="input">
+            </div>
+            <br>
+            <!-- Container dos resultados -->
+            <div class="resultados">
+                <div id="divMensagem">Os resultados aparecerão aqui</div> <br>
+                <div id="base_calculos"></div>
+            </div>
+        </div>
+        <!-- Container dos botões -->
+        <div class="botoes">
+            <button onclick="calcular()" class="calcular">Analisar</button>
+            <button onclick="base()" class="bases">Bases de cálculo</button>
+        </div>
+    </div>
 </body>
 
 </html>
