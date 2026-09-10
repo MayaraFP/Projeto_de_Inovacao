@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora Financeira</title>
+</head>
+
+<body>
+    <label for="inputQntSala">Digite aqui a quantidade de salas em seu biotério:</label>
+    <input placeholder="Quantidade de salas" type="text" id="inputQntSala">
+    <br> <br>
+    <label for="inputQntGaiolaSala">Agora, digite aqui uma média de quantas gaiolas você tem por sala:</label>
+    <input type="text" placeholder="Gaiolas por sala" id="inputQntGaiolaSala">
+    <br> <br>
+    <label for="inputQntRato">Quantos ratos você tem em seu biotério?</label>
+    <input type="text" placeholder="Quantidade de ratos" id="inputQntRato">
+    <br> <br>
+    <label for="inputQntCamundongo">E camundongos, quantos tem?</label>
+    <input placeholder="Quantidade de camundongos" type="text" id="inputQntCamundongo">
+    <br> <br>
+    <label for="inputDuracaoPesquisa">Quanto tempo, em meses, essa pesquisa durou?</label>
+    <input type="text" placeholder="Duração da pesquisa (em meses)" id="inputDuracaoPesquisa">
+    <br> <br>
+    <label for="inputQntOcorrencia">Quantas ocorrencias com temperatura essa pesquisa teve?</label>
+    <input placeholder="Quantidade de ocorrencias" type="text" id="inputQntOcorrencia">
+    <br> <br>
+    <label for="inputQntTecnicos">Quantos técnicos trabalharam nessa pesquisa?</label>
+    <input type="text" placeholder="Quantidade de técnicos" id="inputQntTecnicos">
+    <br><br>
+    <label for="inputOutrosCustos">Por fim,Informe um valor estimado de despesas adicionais da pesquisa, como materiais,
+        procedimentos ou a utilização de equipamentos.</label>
+    <input type="text" placeholder="Custos adicionais" id="inputOutrosCustos">
+    <br><br>
+    <button onclick="calcular()">Analisar</button>
+    <div id="divMensagem"></div>
+</body>
+
+</html>
+<script>
+    function calcular() {
+        let qntSala = Number(inputQntSala.value);
+        let qntGaiolaSala = Number(inputQntGaiolaSala.value);
+        let qntRato = Number(inputQntRato.value);
+        let qntCamundongo = Number(inputQntCamundongo.value);
+        let qntOcorrencia = Number(inputQntOcorrencia.value);
+        let duracaoPesquisa = Number(inputDuracaoPesquisa.value);
+        let qntTecnicos = Number(inputQntTecnicos.value);
+        let outrosCustos = Number(inputOutrosCustos.value);
+
+        let gaiolasPorSala = qntGaiolaSala * qntSala;
+        let custoTotalRato = qntRato * 45.00;
+        let custoTotalCamundongo = qntCamundongo * 30.00;
+        let custoTotalGaiolas = gaiolasPorSala * duracaoPesquisa * 55.00;
+        let custoTecnicos = qntTecnicos * duracaoPesquisa * 3156;
+        let custoPesquisa = custoTotalRato + custoTotalCamundongo + custoTotalGaiolas + custoTecnicos + outrosCustos;
+        let custoMensalPesquisa = custoPesquisa / duracaoPesquisa;
+
+        let percentualRetrabalho;
+
+        // somente uma simulação de quanto X ocorrencias/problemas com temperaturas pode custar
+        if (qntOcorrencia == 0) {
+            percentualRetrabalho = 0;
+        }
+        else if (qntOcorrencia <= 2) {
+            percentualRetrabalho = 0.10;
+
+        }
+        else if (qntOcorrencia <= 5) {
+            percentualRetrabalho = 0.25;
+        }
+        else {
+            percentualRetrabalho = 0.50;
+        }
+
+        let custoMensalRetrabalho = custoMensalPesquisa * percentualRetrabalho;
+        let custoTotalRetrabalho = custoPesquisa * percentualRetrabalho;
+
+        if (qntOcorrencia == 0) {
+            divMensagem.innerHTML = `A sua pesquisa teve uma duração de ${duracaoPesquisa} meses, e nesse tempo, ela teve um custo total de R$${(custoPesquisa).toFixed(2)} 
+            (com um custo mensal de R$${(custoMensalPesquisa).toFixed(2)}). Com nenhuma ocorrencia, você não deve se preocupar com algum possível custo para retrabalho.`
+        }
+        else if (qntOcorrencia <= 2) {
+            divMensagem.innerHTML = `Por conta da(s) ${qntOcorrencia} ocorrencia(s), a sua pesquisa teve um custo mensal de R$${(custoMensalPesquisa).toFixed(2)} e um custo total de 
+            R$${(custoPesquisa).toFixed(2)}. Porém, sua pesquisa apresenta um impacto baixo e um investimento desperdiçado, pois considerando que aproximadamente 10% da pesquisa possa ter sido comprometida, 
+            o custo potencial de retrabalho seria de R$${custoTotalRetrabalho.toFixed(2)}.
+            <br> <b> Os percentuais de retrabalho são valores estimativos utilizados somente para simulação e não representam uma taxa real de perda. </b>`
+        }
+        else if (qntOcorrencia <= 5) {
+            divMensagem.innerHTML = `
+            Por conta das ${qntOcorrencia} ocorrências, a sua pesquisa teve um custo mensal de R$${(custoMensalPesquisa).toFixed(2)} e um custo total de R$${(custoPesquisa).toFixed(2)}.
+            Porém, sua pesquisa apresenta um impacto moderado e um grande investimento desperdiçado, pois considerando que aproximadamente
+            25% da pesquisa possa ter sido comprometida, o custo potencial de retrabalho seria de R$${custoTotalRetrabalho.toFixed(2)}. 
+            <br> <b> Os percentuais de retrabalho são valores estimativos utilizados somente para simulação e não representam uma taxa real de perda. </b>`;
+
+        }
+        else {
+            divMensagem.innerHTML = `
+            Por conta das ${qntOcorrencia} ocorrências, a sua pesquisa teve um custo mensal de R$${(custoMensalPesquisa).toFixed(2)} e um custo total de R$${(custoPesquisa).toFixed(2)}.
+            Porém, sua pesquisa apresenta um alto risco e um enorme desperdício no investimento, pois considerando que aproximadamente
+            50% da pesquisa possa ter sido comprometida, o custo potencial de retrabalho seria de R$${custoTotalRetrabalho.toFixed(2)}.
+                        <br> <b> Os percentuais de retrabalho são valores estimativos utilizados somente para simulação e não representam uma taxa real de perda. </b>`;
+        }
+
+    }
+</script>
